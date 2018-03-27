@@ -31,14 +31,12 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-
 sass:
     style: compressed
     #load_paths: _sass
     sass_dir:  _sass
     load_paths:
       - node_modules
-
 # OCTOPRESS SECTION
 # Default extension for new posts and pages
 post_ext: md

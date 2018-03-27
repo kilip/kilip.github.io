@@ -1,4 +1,5 @@
 ---
+lang: id
 layout: post
 title: "Blogging Gratis"
 ---
