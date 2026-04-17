@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+
+// Filter: Cuma ambil journal yang isPrivate-nya eksplisit false
+const journals = await getCollection('journal', ({ data }) => {
+	return data.isPrivate === false;
+});
+
+// Urutkan berdasarkan tanggal terbaru
+journals.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Public Journal - Diary Bray</title>
+		<style>
+			body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+			h1 { color: #333; }
+			ul { list-style: none; padding: 0; }
+			li { margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+			a { text-decoration: none; color: #22c55e; }
+			a:hover { text-decoration: underline; }
+			.date { font-size: 0.9rem; color: #666; }
+            .back { margin-bottom: 1rem; display: block; }
+		</style>
+	</head>
+	<body>
+        <a href="/" class="back">← Balik ke Home</a>
+		<h1>📝 Public Journal</h1>
+		<p>Catatan harian yang sengaja gue buka buat publik. Gak semua rahasia bray!</p>
+		<hr />
+		{journals.length === 0 ? (
+			<p>Belum ada journal publik bray. Semuanya masih <i>isPrivate: true</i>.</p>
+		) : (
+			<ul>
+				{journals.map((entry) => (
+					<li>
+						<div class="date">{entry.data.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+						<h2><a href={`/journal/${entry.id}`}>{entry.data.title}</a></h2>
+						<p>{entry.data.description || 'Gak ada deskripsi bray.'}</p>
+					</li>
+				))}
+			</ul>
+		)}
+	</body>
+</html>

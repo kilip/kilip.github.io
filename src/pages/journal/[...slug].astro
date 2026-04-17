@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const journals = await getCollection('journal', ({ data }) => {
+		return data.isPrivate === false;
+	});
+	return journals.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{entry.data.title}</title>
+		<style>
+			body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+			article { margin-top: 2rem; }
+			.date { color: #666; margin-bottom: 2rem; }
+            .back { margin-bottom: 1rem; display: block; text-decoration: none; color: #22c55e; }
+		</style>
+	</head>
+	<body>
+		<a href="/journal" class="back">← Balik ke Daftar Journal</a>
+		<article>
+			<div class="date">{entry.data.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+			<h1>{entry.data.title}</h1>
+			<Content />
+		</article>
+	</body>
+</html>
