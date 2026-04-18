@@ -36,14 +36,18 @@ tags: ["project", "legacy", "automation"]
 ## ⚡ Current Focus
 1. Membuat PRD (Product Requirements Document) untuk sistem warisan digital.
 2. Riset cara otomatisasi GitHub Actions dari luar (Webhook).
+3. Draft desain awal GoodBye Protocol.
 
 ---
 
 ## 📋 Open Tasks (High Priority)
+- [ ] **Dead Man's Switch**: Setup sistem yang nunggu status aktif lu, kalau lu absen lama, otomatis publish semua catatan.
 - [ ] Bikin PRD GoodBye Protocol.
 - [ ] Riset mekanisme "Heartbeat" (apakah mau pake GitHub Activity atau external tool).
+- [ ] Desain: Halaman akses darurat untuk keluarga.
 
 ---
 
 ## 📓 Recent Activity
 - **2026-04-18**: Proyek GoodBye diinisialisasi ke dalam Second Brain.
+- **2026-04-18**: Menerima migrasi tugas riset dan desain dari Coding Logs.
