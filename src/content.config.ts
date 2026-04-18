@@ -3,8 +3,8 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro:schema';
 
 const blog = defineCollection({
-	// Loader buat artikel yang sudah dipublish
-	loader: glob({ pattern: '**/[^_]*.md', base: "../diary/50_Articles/Published" }),
+	// Sekarang loader baca dari folder internal src/content/
+	loader: glob({ pattern: '**/[^_]*.md', base: "src/content/blog" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
@@ -18,8 +18,7 @@ const blog = defineCollection({
 });
 
 const journal = defineCollection({
-	// Loader buat catatan harian
-	loader: glob({ pattern: '**/[^_]*.md', base: "../diary/00_Journal" }),
+	loader: glob({ pattern: '**/[^_]*.md', base: "src/content/journal" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
@@ -31,10 +30,8 @@ const journal = defineCollection({
 });
 
 const projects = defineCollection({
-	// Loader buat Dashboard project
-	loader: glob({ pattern: '**/Dashboard.md', base: "../diary/10_Projects" }),
+	loader: glob({ pattern: '**/Dashboard.md', base: "src/content/projects" }),
 	schema: z.object({
-		// Mendukung field dari template dan file yang sudah ada
 		project_name: z.string().optional(),
 		project: z.string().optional(),
 		status: z.string().optional(),
